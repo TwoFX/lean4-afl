@@ -94,8 +94,15 @@ scp corpus-min.tar.lz SERVER:fuzzing
 ## Running the fuzzer
 
 ```bash
-AFL_POST_LIBRARY=/home/markus/lean4-afl/post_library.so /home/markus/AFL/afl-fuzz -m 1500 -i corpus/ -o output/ -x /home/markus/lean4-afl/lean4.dict -M fuzzer01 -- /home/markus/lean4/build/bin/lean @@
-AFL_POST_LIBRARY=/home/markus/lean4-afl/post_library.so /home/markus/AFL/afl-fuzz -m 1500 -i corpus/ -o output/ -x /home/markus/lean4-afl/lean4.dict -S fuzzer02 -- /home/markus/lean4/build/bin/lean @@
-AFL_POST_LIBRARY=/home/markus/lean4-afl/post_library.so /home/markus/AFL/afl-fuzz -m 1500 -i corpus/ -o output/ -x /home/markus/lean4-afl/lean4.dict -S fuzzer03 -- /home/markus/lean4/build/bin/lean @@
-AFL_POST_LIBRARY=/home/markus/lean4-afl/post_library.so /home/markus/AFL/afl-fuzz -m 1500 -i corpus/ -o output/ -x /home/markus/lean4-afl/lean4.dict -S fuzzer04 -- /home/markus/lean4/build/bin/lean @@
+LD_LIBRARY_PATH=/home/markus/.local/lib AFL_POST_LIBRARY=/home/markus/lean4-afl/post_library.so /home/markus/AFL/afl-fuzz -m 5000 -i corpus/ -o output/ -x /home/markus/lean4-afl/lean4.dict -M fuzzer01 -- /home/markus/lean4/build/bin/lean @@
+LD_LIBRARY_PATH=/home/markus/.local/lib AFL_POST_LIBRARY=/home/markus/lean4-afl/post_library.so /home/markus/AFL/afl-fuzz -m 5000 -i corpus/ -o output/ -x /home/markus/lean4-afl/lean4.dict -S fuzzer02 -- /home/markus/lean4/build/bin/lean @@
+LD_LIBRARY_PATH=/home/markus/.local/lib AFL_POST_LIBRARY=/home/markus/lean4-afl/post_library.so /home/markus/AFL/afl-fuzz -m 5000 -i corpus/ -o output/ -x /home/markus/lean4-afl/lean4.dict -S fuzzer03 -- /home/markus/lean4/build/bin/lean @@
+LD_LIBRARY_PATH=/home/markus/.local/lib AFL_POST_LIBRARY=/home/markus/lean4-afl/post_library.so /home/markus/AFL/afl-fuzz -m 5000 -i corpus/ -o output/ -x /home/markus/lean4-afl/lean4.dict -S fuzzer04 -- /home/markus/lean4/build/bin/lean @@
 ```
+
+## Minimizing tests
+
+```bash
+/home/markus/code/AFL/afl-tmin -i crash.lean -o mini.lean -m 5000 -- /home/markus/code/lean4/build/bin/lean @@
+```
+
