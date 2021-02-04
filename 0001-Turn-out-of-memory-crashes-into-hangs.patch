@@ -1,0 +1,79 @@
+From f23f93bbdce76b645fb6725c2be8254dbe6a30b7 Mon Sep 17 00:00:00 2001
+From: Markus Himmel <markus@himmel-villmar.de>
+Date: Wed, 3 Feb 2021 09:42:38 +0100
+Subject: [PATCH] Turn out-of-memory crashes into hangs
+
+---
+ mpz/init2.c    | 1 +
+ mpz/n_pow_ui.c | 2 ++
+ mpz/realloc.c  | 2 ++
+ mpz/realloc2.c | 1 +
+ 4 files changed, 6 insertions(+)
+
+diff --git a/mpz/init2.c b/mpz/init2.c
+index fcbaa66..39b51d5 100644
+--- a/mpz/init2.c
++++ b/mpz/init2.c
+@@ -45,6 +45,7 @@ mpz_init2 (mpz_ptr x, mp_bitcnt_t bits)
+       if (UNLIKELY (new_alloc > INT_MAX))
+ 	{
+ 	  fprintf (stderr, "gmp: overflow in mpz type\n");
++	  while (1) {}
+ 	  abort ();
+ 	}
+     }
+diff --git a/mpz/n_pow_ui.c b/mpz/n_pow_ui.c
+index 69fdd12..d263c56 100644
+--- a/mpz/n_pow_ui.c
++++ b/mpz/n_pow_ui.c
+@@ -221,6 +221,7 @@ mpz_n_pow_ui (mpz_ptr r, mp_srcptr bp, mp_size_t bsize, unsigned long int e)
+   if (ovfl)
+     {
+       fprintf (stderr, "gmp: overflow in mpz type\n");
++	  while (1) {}
+       abort ();
+     }
+ 
+@@ -383,6 +384,7 @@ mpz_n_pow_ui (mpz_ptr r, mp_srcptr bp, mp_size_t bsize, unsigned long int e)
+   if (ovfl)
+     {
+       fprintf (stderr, "gmp: overflow in mpz type\n");
++	  while (1) {}
+       abort ();
+     }
+   ralloc = ralloc / GMP_NUMB_BITS + 5;
+diff --git a/mpz/realloc.c b/mpz/realloc.c
+index bb55bf6..47a89eb 100644
+--- a/mpz/realloc.c
++++ b/mpz/realloc.c
+@@ -46,6 +46,7 @@ _mpz_realloc (mpz_ptr m, mp_size_t new_alloc)
+       if (UNLIKELY (new_alloc > ULONG_MAX / GMP_NUMB_BITS))
+ 	{
+ 	  fprintf (stderr, "gmp: overflow in mpz type\n");
++	  while (1) {}
+ 	  abort ();
+ 	}
+     }
+@@ -54,6 +55,7 @@ _mpz_realloc (mpz_ptr m, mp_size_t new_alloc)
+       if (UNLIKELY (new_alloc > INT_MAX))
+ 	{
+ 	  fprintf (stderr, "gmp: overflow in mpz type\n");
++	  while (1) {}
+ 	  abort ();
+ 	}
+     }
+diff --git a/mpz/realloc2.c b/mpz/realloc2.c
+index 5350339..65f1436 100644
+--- a/mpz/realloc2.c
++++ b/mpz/realloc2.c
+@@ -45,6 +45,7 @@ mpz_realloc2 (mpz_ptr m, mp_bitcnt_t bits)
+       if (UNLIKELY (new_alloc > INT_MAX))
+ 	{
+ 	  fprintf (stderr, "gmp: overflow in mpz type\n");
++	  while (1) {}
+ 	  abort ();
+ 	}
+     }
+-- 
+2.25.1
+
