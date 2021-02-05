@@ -4,7 +4,8 @@ So far, this has uncovered a few crashes ([1](https://github.com/leanprover/lean
 [2](https://github.com/leanprover/lean4/issues/297)
 [3](https://github.com/leanprover/lean4/issues/301)
 [4](https://github.com/leanprover/lean4/commit/c4cfbceb710c72dacb525ce658b9a57922dea912)
-[5](https://github.com/leanprover/lean4/issues/302)) as well as a [soundness bug](https://leanprover-community.github.io/archive/stream/270676-lean4/topic/Contradiction.3F.html#224625352).
+[5](https://github.com/leanprover/lean4/issues/302)
+[6](https://github.com/leanprover/lean4/issues/303)) as well as a [soundness bug](https://leanprover-community.github.io/archive/stream/270676-lean4/topic/Contradiction.3F.html#224625352).
 
 The Lean 4 interpreter is a very complex fuzzing target, and also very slow. I'm
 always trying to think of ways to make fuzzing more effective. This repository
