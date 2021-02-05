@@ -1,15 +1,28 @@
-From f23f93bbdce76b645fb6725c2be8254dbe6a30b7 Mon Sep 17 00:00:00 2001
+From 3196eb04cd94152612807457937879f4aedee807 Mon Sep 17 00:00:00 2001
 From: Markus Himmel <markus@himmel-villmar.de>
 Date: Wed, 3 Feb 2021 09:42:38 +0100
 Subject: [PATCH] Turn out-of-memory crashes into hangs
 
 ---
+ memory.c       | 1 +
  mpz/init2.c    | 1 +
  mpz/n_pow_ui.c | 2 ++
  mpz/realloc.c  | 2 ++
  mpz/realloc2.c | 1 +
- 4 files changed, 6 insertions(+)
+ 5 files changed, 7 insertions(+)
 
+diff --git a/memory.c b/memory.c
+index 5e00191..994d348 100644
+--- a/memory.c
++++ b/memory.c
+@@ -54,6 +54,7 @@ __gmp_default_allocate (size_t size)
+   if (ret == 0)
+     {
+       fprintf (stderr, "GNU MP: Cannot allocate memory (size=%lu)\n", (long) size);
++	  while (1) {}
+       abort ();
+     }
+ 
 diff --git a/mpz/init2.c b/mpz/init2.c
 index fcbaa66..39b51d5 100644
 --- a/mpz/init2.c
